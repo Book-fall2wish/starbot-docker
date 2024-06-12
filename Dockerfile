@@ -6,7 +6,7 @@ WORKDIR $BASE_PATH
 
 # 安装所需的工具
 RUN apt update && apt install redis-server -y && \
-    pip install -i https://mirrors.cloud.tencent.com/pypi/simple starbot-bilibili
+    pip install starbot-bilibili
 
 # 将交互脚本复制到镜像中
 # COPY 推送配置.json /home/starbot/推送配置.json
