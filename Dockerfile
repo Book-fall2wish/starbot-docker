@@ -12,5 +12,7 @@ RUN apt update && apt install redis-server -y && \
 # 将交互脚本复制到镜像中
 # COPY 推送配置.json /home/starbot/推送配置.json
 # 需要在映射目录下保存推送配置.json和main.py
+COPY wait-for-redis.sh /usr/src/app/
+RUN chmod +x /usr/src/app/wait-for-redis.sh
 
-CMD ["/etc/init.d/redis-server","restart","&&","python", "main.py"]
+CMD /usr/src/app/wait-for-redis.sh && python main.py
