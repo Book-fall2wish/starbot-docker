@@ -12,4 +12,4 @@ RUN apt update && apt install redis-server -y && \
 # COPY 推送配置.json /home/starbot/推送配置.json
 # 需要在映射目录下保存推送配置.json和main.py
 
-CMD ["python", "main.py"]
+CMD ["/etc/init.d/redis-server","restart","python", "main.py"]
