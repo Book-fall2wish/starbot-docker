@@ -1,18 +1,24 @@
-FROM python:3.10
+# 使用 Python 3.10 作为基础镜像
+FROM python:3.10-slim
 
-ENV TZ Asia/Shanghai
-ENV BASE_PATH=/home/starbot
-WORKDIR $BASE_PATH
-ENTRYPOINT ["/usr/bin/redis-server"]
+# 设置环境变量
+ENV PYTHONUNBUFFERED=1
 
-# 安装所需的工具
-RUN apt update && apt install redis-server -y && \
-    pip install starbot-bilibili
+# 安装 Redis 和相关依赖
+RUN apt-get update && \
+    apt-get install -y redis-server && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# 将交互脚本复制到镜像中
-# COPY 推送配置.json /home/starbot/推送配置.json
-# 需要在映射目录下保存推送配置.json和main.py
-COPY wait-for-redis.sh /usr/src/app/
-RUN chmod +x /usr/src/app/wait-for-redis.sh
+# 创建一个目录来存放main.py
+WORKDIR /app
 
-CMD /usr/src/app/wait-for-redis.sh && python main.py
+# 安装 starbot-bilibili
+RUN pip install --no-cache-dir starbot-bilibili
+
+# 复制启动脚本并赋予执行权限
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# 设置容器启动时运行的命令
+CMD ["/app/start.sh"]
