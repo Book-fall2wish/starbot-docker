@@ -1,8 +1,10 @@
 mirai和starbot均运行于docker中
 先创建network
+```
 docker network create my_network
-
+```
 mirai的docker compose：
+```
 services:
   mirai:
     image: fall2wish/mirai-overflow-docker:latest
@@ -20,8 +22,9 @@ networks:
   botnetwork:
     external: true
     name: botnetwork
-
+```
 starbot的docker compose如下：
+```
 services:
   starbot:
     image: ghcr.io/book-fall2wish/starbot-docker:main
@@ -38,10 +41,10 @@ networks:
   botnetwork:
     external: true
     name: botnetwork
-
+```
 
 mirai中setting.yml设置如下：
-
+```
 adapters:
   - http
   - ws
@@ -64,8 +67,10 @@ adapterSettings:
     host: 0.0.0.0
     port: 7827
     reservedSyncId: -1
+```
 
-
-starbot中main.py如下：
-
+starbot中main.py添加如下行：
+```
 config.set("MIRAI_HOST", "mirai_overflow")
+```
+其余设置与官方文档一致
