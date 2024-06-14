@@ -16,9 +16,9 @@ WORKDIR /app
 # 安装 starbot-bilibili
 RUN pip install --no-cache-dir starbot-bilibili
 
-# 复制启动脚本并赋予执行权限
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+# 复制启动脚本到 /usr/local/bin 并赋予执行权限
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
 
 # 设置容器启动时运行的命令
-CMD ["/app/start.sh"]
+CMD ["/usr/local/bin/start.sh"]
