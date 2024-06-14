@@ -1,4 +1,9 @@
-mirai和starbot均运行于docker中
+mirai项目地址：https://github.com/mamoe/mirai
+starbot项目地址：https://github.com/Starlwr/StarBot
+
+本项目仅将starbot整合至docker中运行
+
+假设mirai和starbot均运行于docker中
 先创建network
 ```
 docker network create my_network
