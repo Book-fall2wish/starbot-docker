@@ -6,7 +6,7 @@ starbot项目地址：https://github.com/Starlwr/StarBot
 假设mirai和starbot均运行于docker中
 先创建network
 ```
-docker network create my_network
+docker network create botnetwork
 ```
 mirai的docker compose：
 ```
